@@ -93,6 +93,12 @@ sh install_9.sh
       
 ## Couchbase Server 5.0
 
+<div class="tabs">
+	<a name="manual">Manual</a>
+	<a name="docker">Docker</a>
+	<a name="cloud">Cloud</a>
+</div>
+
 ### Manual
 
 In this lesson, you will install and launch version 5.0 of the Couchbase Server.
@@ -126,9 +132,11 @@ In this lesson, you will install and launch version 5.0 of the Couchbase Server.
 - Launch Couchbase Server (if not already runnning)
 - Log into the "Admin Console" with appropriate Administrator credentials you created during installation
 - Select the "Buckets" option from the menu on the left
-- Verify that you have around 31,000 documents in your travel-sample bucket       
-           
-### Docker (Local)
+- Verify that you have around 31,000 documents in your travel-sample bucket
+
+- - -
+   
+### Docker
 
 - Create a local docker network named "workshop" if one does not exist already. Open a terminal window and run the following command
   ```bash
@@ -154,13 +162,15 @@ In this lesson, you will install and launch version 5.0 of the Couchbase Server.
   ```bash
   $ docker ps
   ```
-     
+
 #### Try it out
-              
+
 - Launch Couchbase Server 
 - Log into the "Admin Console" with username as "Administrator" and password as "password"
 - Select the "Buckets" option from the menu on the left
 - Verify that you have around 31,000 documents in your travel-sample bucket
+
+- - -
 
 ### Cloud
 
@@ -239,11 +249,20 @@ static let serverBackendUrl:URL? = URL.init(string: "http://54.148.83.39:4984")
  ```
 
 ### Try it out (Travel App)
+
 - Access Travel Web App from the URL listed in the Deploy instance. In my example (from screenshot above), that would be `http://54.148.83.39:8080`
 - Verify that you see the login screen of the Travel Sample Web App as shown below
    ![](https://raw.githubusercontent.com/couchbaselabs/mobile-travel-sample/master/content/assets/try_cb_login.png)
 
+- - - 
+
 ## Sync Gateway 1.5
+
+<div class="tabs">
+	<a name="manual">Manual</a>
+	<a name="docker">Docker</a>
+	<a name="cloud">Cloud</a>
+</div>
 
 ### Manual
 
@@ -275,6 +294,7 @@ $ ./sync_gateway /path/to/mobile-travel-sample/sync-gateway-config-travelsample.
 {"couchdb":"Welcome","vendor":{"name":"Couchbase Sync Gateway","version":1.5},"version":"Couchbase Sync Gateway/1.5.0(594;e78dbf1)"}
 ```
 
+- - -
 
 ### Docker (Local)
 
@@ -322,13 +342,23 @@ $ ./sync_gateway /path/to/mobile-travel-sample/sync-gateway-config-travelsample.
 {"couchdb":"Welcome","vendor":{"name":"Couchbase Sync Gateway","version":1.5},"version":"Couchbase Sync Gateway/1.5.0(594;e78dbf1)"}
 ```
 
+- - -
+
 ### Cloud
 
 **NOTE:** The RightScale cloud environment is only available for in-classroom run workshops. 
 
 If you chose Cloud in the previous previous step then all the components (Sync Gateway, Couchbase Server and the Python Web App) are already installed and running. You can move on to the [next chapter](#/1/0/0) to learn about the data modeling requirements of the app.
-          
+
+- - -
+  
 ## Travel Web Backend
+
+<div class="tabs">
+	<a name="manual">Manual</a>
+	<a name="docker">Docker</a>
+	<a name="cloud">Cloud</a>
+</div>
 
 ### Manual
 
@@ -389,6 +419,8 @@ python travel.py
 - Verify that you see the login screen of the Travel Sample Web App as shown below
   ![](https://raw.githubusercontent.com/couchbaselabs/mobile-travel-sample/master/content/assets/try_cb_login.png)
 
+- - -
+
 ### Docker (Local)
               
 *NOTE* : If you are running the Web App in a docker container, please make sure that you have the Couchbase Server and Sync Gateway running in containers as well. If not, please follow instructions [here](/tutorials/travel-sample/develop/swift#/0/2/1) to install the server container and [here](/tutorials/travel-sample/develop/swift#/0/3/1) to install sync gateway container.
@@ -420,10 +452,14 @@ python travel.py
   - Verify that you see the login screen of the Travel Sample Web App as shown below
     ![](https://raw.githubusercontent.com/couchbaselabs/mobile-travel-sample/master/content/assets/try_cb_login.png)
 
+- - -
+
 ### Cloud
 
-**NOTE:** The RightScale cloud environment is only available for in-classroom run workshops. 
-         
+**NOTE:** The RightScale cloud environment is only available for in-classroom run workshops.
+
+- - -
+
 # Design
 
 ## Data Modeling
