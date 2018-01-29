@@ -3,4 +3,6 @@ title: Mobile Travel Sample
 version: 'master'
 start_page: ROOT:swift.adoc
 nav:
-- modules/ROOT/nav.adoc
+- modules/ROOT/swift.adoc
+- modules/ROOT/java.adoc
+- modules/ROOT/csharp.adoc

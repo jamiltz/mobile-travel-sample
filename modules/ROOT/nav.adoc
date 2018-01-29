@@ -1,4 +1,0 @@
-* Mobile Travel Sample
-** xref:swift.adoc#travel-mobile-app[Mobile Travel Sample]
-** xref:java.adoc#travel-mobile-app[Mobile Travel Sample]
-** xref:swift.adoc#sync-gateway-1.5[Mobile Travel Sample]
