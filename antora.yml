@@ -1,0 +1,6 @@
+name: mobile-travel-sample
+title: Mobile Travel Sample
+version: 'master'
+start_page: ROOT:swift.adoc
+nav:
+- modules/ROOT/nav.adoc
