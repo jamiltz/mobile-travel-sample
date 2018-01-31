@@ -1,0 +1,8 @@
+name: deploy-couchbase-tutorial
+title: Deploy Couchbase Tutorial
+version: 'master'
+start_page: vagrant:index.adoc
+nav:
+- modules/vagrant/nav.adoc
+- modules/aws/nav.adoc
+- modules/rightscale/nav.adoc
