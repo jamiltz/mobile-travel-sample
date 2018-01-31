@@ -3,17 +3,12 @@ ifndef::env-site,env-github[]
 include::_attributes.adoc[]
 endif::[]
 
-[[installation]]
-Installation
-------------
+= Installation
 
-[[overview]]
-Overview
-~~~~~~~~
 
-[[components]]
-Components
-^^^^^^^^^^
+== Overview
+
+=== Components
 
 This is the high level architecture of the system that we will be
 running
@@ -81,7 +76,6 @@ Try it out
 * Run the following command from your terminal command line
 `bash   git --version` You should see the version of git installed
 
-[[travel-mobile-app]]
 Travel Mobile App
 -----------------
 
@@ -137,7 +131,6 @@ Try it out
 * Build and run the project using simulator
 * Verify that the login screen appears in the simulator
 
-[[couchbase-server-5.0]]
 Couchbase Server 5.0
 ~~~~~~~~~~~~~~~~~~~~
 
@@ -356,7 +349,6 @@ image:https://raw.githubusercontent.com/couchbaselabs/mobile-travel-sample/maste
 
 '''''
 
-[[sync-gateway-1.5]]
 Sync Gateway 1.5
 ~~~~~~~~~~~~~~~~
 
@@ -448,13 +440,16 @@ the `localhost` in the file with `cb-server` and save
 `sync-gateway-config-travelsample.json` file. Once the command has
 completed you can start the application with the following.
 
-```bash $ cd /path/to/mobile-travel-sample/
+[source, bash]
+---
+$ cd /path/to/mobile-travel-sample/
 
 $ docker run -p 4984-4985:4984-4985 --network workshop --name
 sync-gateway -d -v
 `pwd`/sync-gateway-config-travelsample.json:/etc/sync_gateway/sync_gateway.json
 connectsv/sync-gateway-internal:1.5.0-community -adminInterface :4985
-/etc/sync_gateway/sync_gateway.json ```
+/etc/sync_gateway/sync_gateway.json
+---
 
 * You can view the logs at any time by running the following command
 `bash   $ docker logs sync-gateway`
@@ -489,7 +484,6 @@ to learn about the data modeling requirements of the app.
 
 '''''
 
-[[travel-web-backend]]
 Travel Web Backend
 ~~~~~~~~~~~~~~~~~~
 
@@ -547,7 +541,7 @@ $ virtualenv /path/to/try-cb-python
 [source,bash]
 ----
 $ source /path/to/try-cb-python/bin/activate
-$ (try-cb-python) Macintosh-2:try-cb-python mactester$ 
+$ (try-cb-python) Macintosh-2:try-cb-python mactester$
 ----
 * The application uses several Python libraries that need to be
 installed, this are listed in requirements.txt and can be automatically
@@ -565,7 +559,7 @@ you have used during Couchbase Server install. This defaults to
 [source,python]
 ----
 DEFAULT_USER = "Administrator"
-PASSWORD = 'password' 
+PASSWORD = 'password'
 ----
 * Now launch the Travel Web App ```bash python travel.py
 * Running on http://localhost:8080/ (Press CTRL+C to quit) ```
@@ -624,11 +618,9 @@ in-classroom run workshops.
 
 '''''
 
-[[design]]
 Design
 ------
 
-[[data-modeling]]
 Data Modeling
 ~~~~~~~~~~~~~
 
@@ -793,11 +785,9 @@ curl -X GET http://localhost:4984/travel-sample/airline_137 -H 'authorization: B
 ----
 * Confirm that "_id" property in the JSON response is "airline_137"
 
-[[develop]]
 Develop
 -------
 
-[[mvp-architecture]]
 MVP Architecture
 ~~~~~~~~~~~~~~~~
 
@@ -895,11 +885,9 @@ implements the `HotelPresenterProtocol`
 In addition, there are some simple custom UI widgets like custom
 UITableViewCells
 
-[[the-basics]]
 The Basics
 ~~~~~~~~~~
 
-[[create-a-database]]
 Create a Database
 ^^^^^^^^^^^^^^^^^
 
@@ -1035,7 +1023,7 @@ if document == nil {
   // First time bookmark is created for guest account
   // Create document of type "bookmarkedhotels"
   document = MutableDocument.init(withData: ["type":"bookmarkedhotels","hotels":[String]()])
-  
+
 }
 ----
 
@@ -1071,7 +1059,7 @@ if let document = document?.toMutable() {
   // Update and save the bookmark document
   document.setArray(bookmarked, forKey: "hotels")
   try db.saveDocument(document)
-  
+
 }
 ----
 
@@ -1091,7 +1079,7 @@ for hotelDoc in hotels {
       }
       else {
           try db.saveDocument(MutableDocument.init(withID: idVal, data: hotelDoc))
-      
+
       }
   }
 }
@@ -1175,7 +1163,6 @@ a Document] section
 
 image:https://raw.githubusercontent.com/couchbaselabs/mobile-travel-sample/master/content/assets/basics_delete_document.gif[image]
 
-[[security]]
 Security
 ~~~~~~~~
 
@@ -1248,7 +1235,7 @@ API to dynamically create the user.
 [source,javascript]
 ----
  "users":{
-"admin": {"password": "password", "admin_channels": ["*"]}, 
+"admin": {"password": "password", "admin_channels": ["*"]},
 "demo": {"password": "password"},
 "tester": {"password": "password"}
   }
@@ -1296,7 +1283,6 @@ curl -X GET http://localhost:4984/travel-sample/ -H 'authorization: Basic ZGVtbz
 * Confirm that you see the details of the "travel-sample" database and
 "state" is "online"
 
-[[sync]]
 Sync
 ~~~~
 
@@ -1508,7 +1494,7 @@ invoked.
             self?.postNotificationOnReplicationState(s.activity)
         }
     })
-      
+
 ----
 
 Start the Replication
@@ -1565,7 +1551,6 @@ your list of flights in the mobile app
 
 image:https://raw.githubusercontent.com/couchbaselabs/mobile-travel-sample/master/content/assets/ios_pull_sync.gif[image]
 
-[[pre-built-database]]
 Pre-built database
 ^^^^^^^^^^^^^^^^^^
 
@@ -1593,7 +1578,7 @@ https://github.com/couchbaselabs/mobile-travel-sample/blob/master/ios/TravelSamp
   // Load prebuilt database from App Bundle and copy over to Applications support path
   if let prebuiltPath = Bundle.main.path(forResource: kDBName, ofType: "cblite2") {
        try Database.copy(fromPath: prebuiltPath, toDatabase: "\(kDBName)", config: options)
-      
+
   }
 ----
 
@@ -1609,7 +1594,6 @@ Try it out
 
 image:https://raw.githubusercontent.com/couchbaselabs/mobile-travel-sample/master/content/assets/ios_prebuilt.gif[image]
 
-[[query]]
 Query
 ~~~~~
 
@@ -1638,7 +1622,7 @@ a `CouchbaseLite.Expression` type. Consider the following query
 ----
 let hotelSearchQuery = Query
                   .select(SelectResult.expression(Meta.id),
-                          SelectResult.expression(Expression.property("name"))) 
+                          SelectResult.expression(Expression.property("name")))
                   .from(DataSource.database(db))
                   .where(
                       Expression.property("description").like("%\(descriptionStr)%")
@@ -1665,7 +1649,7 @@ the Travel App
   struct _Property {
   // Query: Property Expressions
   static let DOCID        = Meta.id
-  
+
   static let TYPE         = Expression.property("type")
   static let USERNAME     = Expression.property("username")
   static let FLIGHTS      = Expression.property("flights")
@@ -1680,7 +1664,7 @@ the Travel App
   static let AIRPORTNAME  = Expression.property("airportname")
   }
 
-  struct _SelectColumn {    
+  struct _SelectColumn {
       // Query: Select Results
       static let NAMERESULT         = SelectResult.expression(_Property.NAME)
       static let AIRPORTNAMERESULT  = SelectResult.expression(_Property.AIRPORTNAME)
@@ -1749,7 +1733,7 @@ do {
 catch {
     handler(nil,error)
   }
-}         
+}
 ----
 
 [[try-it-out-15]]
@@ -1879,7 +1863,6 @@ the list
 
 image:https://raw.githubusercontent.com/couchbaselabs/mobile-travel-sample/master/content/assets/ios_join_query.gif[image]
 
-[[full-text-search]]
 Full Text Search
 ~~~~~~~~~~~~~~~~
 
@@ -1959,7 +1942,7 @@ if  let descExp = descExp {
 
 
 let hotelSearchQuery = Query
-    .select(_SelectColumn.ALLRESULT) 
+    .select(_SelectColumn.ALLRESULT)
     .from(DataSource.database(db))
     .where(
         _Property.TYPE.equalTo("hotel")
@@ -1976,12 +1959,12 @@ the `TableView`.
 var matches:Hotels = []
 do {
     for (_,row) in try hotelSearchQuery.execute().enumerated() {
-        
+
         if let dbName = dbMgr.db?.name, let match = row.dictionary(forKey: dbName) {
-            
+
             matches.append(match.toDictionary())
         }
-        
+
     }
     handler(matches,nil)
 }

@@ -1,2 +1,0 @@
-* Swift
-** xref:swift.adoc[Mobile Travel Sample]

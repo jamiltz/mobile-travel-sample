@@ -3,16 +3,12 @@ ifndef::env-site,env-github[]
 include::_attributes.adoc[]
 endif::[]
 
-Installation
-------------
+= Installation
 
-[[overview]]
-Overview
-~~~~~~~~
 
-[[components]]
-Components
-^^^^^^^^^^
+== Overview
+
+=== Components
 
 This is the high level architecture of the system that we will be
 running
@@ -86,7 +82,6 @@ git --version
 +
 You should see the version of git installed
 
-[[travel-mobile-app]]
 Travel Mobile App
 -----------------
 
@@ -113,7 +108,6 @@ or Xamarin Android)
 UWP App.
 image:https://raw.githubusercontent.com/couchbaselabs/mobile-travel-sample/master/content/assets/uwp_login.png[image]
 
-[[couchbase-server-5.0]]
 Couchbase Server 5.0
 ~~~~~~~~~~~~~~~~~~~~
 
@@ -317,7 +311,7 @@ my example (from screenshot above), that would be
 shown below
 image:https://raw.githubusercontent.com/couchbaselabs/mobile-travel-sample/master/content/assets/try_cb_login.png[image]
 
-[[sync-gateway-1.5]]
+
 Sync Gateway 1.5
 ~~~~~~~~~~~~~~~~
 
@@ -449,7 +443,7 @@ If you chose Cloud in the previous previous step then all the components
 installed and running. You can move on to the link:#/1/0/0[next chapter]
 to learn about the data modeling requirements of the app.
 
-[[travel-web-backend]]
+
 Travel Web Backend
 ~~~~~~~~~~~~~~~~~~
 
@@ -500,7 +494,7 @@ $ virtualenv /path/to/try-cb-python
 [source,bash]
 ----
 $ source /path/to/try-cb-python/bin/activate
-$ (try-cb-python) Macintosh-2:try-cb-python mactester$ 
+$ (try-cb-python) Macintosh-2:try-cb-python mactester$
 ----
 * The application uses several Python libraries that need to be
 installed, this are listed in requirements.txt and can be automatically
@@ -514,11 +508,11 @@ pip install -r requirements.txt
 * Update the travel.py file to reflect the username and password that
 you have used during Couchbase Server install. This defaults to
 "Administrator" and "password"
-+
+
 [source,python]
 ----
 DEFAULT_USER = "Administrator"
-PASSWORD = 'password' 
+PASSWORD = 'password'
 ----
 * Now launch the Travel Web App ```bash python travel.py
 * Running on http://localhost:8080/ (Press CTRL+C to quit) ```
@@ -527,13 +521,12 @@ PASSWORD = 'password'
 Try it out
 ++++++++++
 
-....
 - Open http://localhost:8080/ in your web browser
 - Verify that you see the login screen of the Travel Sample Web App as shown below
     ![](https://raw.githubusercontent.com/couchbaselabs/mobile-travel-sample/master/content/assets/try_cb_login.png)
-....
 
-* title: Docker (Local) description: |
+Docker (Local)
+^^^^^^^^^^^^^^
 
 _NOTE_ : If you are running the Web App in a docker container, please
 make sure that you have the Couchbase Server and Sync Gateway running in
@@ -543,34 +536,36 @@ link:/develop/csharp#/0/3/1[here] to install sync gateway container.
 
 * Create a local docker network named "workshop" if one does not exist
 already. Open a terminal window and run the following command
-+
+
 [source,bash]
 ----
 $ docker network ls
 $ docker network create -d bridge workshop
 ----
+
 * To run the application in a container, you will first get the docker
 image from Docker Cloud. Open a terminal window and run the following.
-+
+
 [source,bash]
 ----
 $ docker pull connectsv/try-cb-python
 ----
+
 * Once the command has completed you can start the application with the
 following.
-+
+
 [source,bash]
 ----
 $ docker run -it -p 8080:8080 --network workshop connectsv/try-cb-python
 ----
-+
+
 You should then see the following in the console output.
-+
+
 [source,bash]
 ----
 Running on http://0.0.0.0:8080/ (Press CTRL+C to quit)
 ----
-+
+
 [[try-it-out-7]]
 Try it out
 ++++++++++
@@ -588,15 +583,12 @@ If you chose Cloud in the previous previous step then all the components
 installed and running. You can move on to the link:#/1/0/0[next chapter]
 to learn about the data modeling requirements of the app.
 
-[[design]]
 Design
 ------
 
-[[data-modeling]]
 Data Modeling
 ~~~~~~~~~~~~~
 
-[[introduction]]
 Introduction
 ^^^^^^^^^^^^
 
@@ -755,19 +747,15 @@ curl -X GET http://localhost:4984/travel-sample/airline_137 -H 'authorization: B
 ----
 * Confirm that "_id" property in the JSON response is "airline_137"
 
-[[develop]]
 Develop
 -------
 
-[[mvvm-architecture]]
 MVVM Architecture
 ~~~~~~~~~~~~~~~~~
 
-[[overview-1]]
 Overview
 ^^^^^^^^
 
-[[the-model-view-viewmodel-pattern]]
 The Model-View-ViewModel pattern
 ++++++++++++++++++++++++++++++++
 
@@ -820,7 +808,6 @@ per view and is named according to the view
 * _HotelsListViewModel_
 * _HotelDetailsViewModel_
 
-[[the-basics]]
 The Basics
 ^^^^^^^^^^
 
@@ -857,7 +844,7 @@ directory for the platform.
 [source,csharp]
 ----
 var options = new DatabaseConfiguration();
- 
+
 // Borrow this functionality from Couchbase Lite
 var defaultDirectory = Service.Provider.GetService<IDefaultDirectoryResolver>().DefaultDirectory();
 var userFolder = Path.Combine(defaultDirectory, username);
@@ -1002,158 +989,6 @@ The screen capture is for UWP version of the app.
 
 image:https://raw.githubusercontent.com/couchbaselabs/mobile-travel-sample/master/content/assets/uwp_basics_add_document.gif[image]
 
-[[title-update-a-document]]
-- title: Update a Document
---------------------------
-
-[[description]]
-description: |
---------------
-
-[[to-update-a-document-you-must-retrieve-it-from-the-database-modify-the-desired-properties-and-write-them-back-to-the-database.-the-update-method-does-this-operation-for-you-in-the-form-of-a-callback.]]
-To update a document, you must retrieve it from the database, modify the
-desired properties and write them back to the database. The update
-method does this operation for you in the form of a callback.
----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-
-[[the-code-below-updates-the-list-of-bookmarked-hotel-ids-in-the-hotels-property-of-the-bookmarkedhotels-document.-the-first-time-a-hotel-is-bookmarked-the-bookmarkedhotels-document-is-created.-subsequently-every-time-you-bookmark-a-hotel-the-hotel-id-is-added-to-hotels-property-of-the-bookmarkedhotels-document.]]
-The code below updates the list of bookmarked hotel Ids in the "hotels"
-property of the _"bookmarkedhotels"_ document. The first time a hotel is
-bookmarked, the _"bookmarkedhotels"_ document is created. Subsequently,
-every time you bookmark a hotel, the hotel Id is added to "hotels"
-property of the _"bookmarkedhotels"_ document.
-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-
-[[the-code-snippet-can-be-found-in-the-hotelpresenter.csharp-file-in-the-bookmarkhotels-function.]]
-The code snippet can be found in the HotelPresenter.csharp file in the
-https://github.com/couchbaselabs/mobile-travel-sample/blob/master/ios/TravelSample/TravelSample/Presenter/HotelPresenter.csharp#L36[bookmarkHotels]
-function.
-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-
-[[csharp]]
-```csharp
----------
-
-[[get-existing-bookmarkedhotels-document-if-one-exists]]
-// get existing "BookmarkedHotels" document if one exists
----------------------------------------------------------
-
-[[var-document-try-fetchguestbookmarkdocumentfromdbdb]]
-var document = try fetchGuestBookmarkDocumentFromDB(db)
--------------------------------------------------------
-
-[[trimming-other-app-logic-code-......]]
-// ....trimming other app logic code ......
--------------------------------------------
-
-[[update-the-bookmarked-list-with-the-ids-of-hotels]]
-// Update the bookmarked list with the Ids of hotels
-----------------------------------------------------
-
-[[var-bookmarked-document.arrayforkey-hotels]]
-var bookmarked = document?.array(forKey: "hotels")
---------------------------------------------------
-
-[[ideally-have-an-api-that-would-append-elements-of-a-native-array-to-existing-arrayobject]]
-// Ideally have an API that would append elements of a native array to
-existing ArrayObject
--------------------------------------------------------------------------------------------
-
-[[for-newid-in-newlyaddedids]]
-for newId in newlyAddedIds \{
------------------------------
-
-[[bookmarked-bookmarked.addstringnewid]]
-bookmarked = bookmarked?.addString(newId)
------------------------------------------
-
-[[section]]
-}
--
-
-[[if-let-document-document]]
-if let document = document \{
------------------------------
-
-[[update-and-save-the-bookmark-document]]
-// Update and save the bookmark document
-----------------------------------------
-
-[[document.setarraybookmarked-forkey-hotels]]
-document.setArray(bookmarked, forKey: "hotels")
------------------------------------------------
-
-[[try-db.savedocument]]
-try db.save(document)
----------------------
-
-[[trimming-other-app-logic-code-......-1]]
-// ....trimming other app logic code ......
--------------------------------------------
-
-[[section-1]]
-}
--
-
-[[section-2]]
-```
----
-
-[[try-it-out-13]]
-## Try it out
--------------
-
-[[follow-the-steps-in-create-a-document-section]]
-- Follow the steps in link:/develop/csharp#/2/0/0[Create a Document]
-section
-----------------------------------------------------------------------------
-
-[[as-guest-user-tap-on-hotels-button]]
-- As Guest User, tap on “hotels” button
----------------------------------------
-
-[[in-location-text-field-enter-london]]
-- In "location" text field , enter "London"
--------------------------------------------
-
-[[you-will-see-list-of-hotels.]]
-- You will see list of hotels.
-------------------------------
-
-[[verify-that-the-first-hotel-in-the-list-is-bookmarked.-if-not-make-sure-you-follow-instructions-in-create-a-document-section.]]
-- Verify that the first hotel in the list is bookmarked. If not, make
-sure you follow instructions in link:[Create a Document] section.
----------------------------------------------------------------------------------------------------------------------------------------
-
-[[swipe-right-on-the-second-hotel-cell]]
-- Swipe right on the second hotel cell
---------------------------------------
-
-[[you-will-get-option-to-bookmark]]
-- You will get option to “Bookmark”
------------------------------------
-
-[[tap-bookmark]]
-- Tap “bookmark”
-----------------
-
-[[this-should-display-a-bookmark-icon-on-the-hotel-cell]]
-- This should display a "bookmark" icon on the hotel cell
----------------------------------------------------------
-
-[[tap-cancel-button]]
-- Tap "Cancel" button
----------------------
-
-[[verify-that-you-see-two-bookmarked-hotels-in-the-bookmarked-hotels-screen]]
-- Verify that you see two bookmarked hotels in the “Bookmarked Hotels”
-screen
------------------------------------------------------------------------------
-
-[[section-3]]
-image:https://raw.githubusercontent.com/couchbaselabs/mobile-travel-sample/master/content/assets/basics_update_document.gif[image]
-----------------------------------------------------------------------------------------------------------------------------------
-
 [[delete-a-document]]
 Delete a Document
 ^^^^^^^^^^^^^^^^^
@@ -1183,7 +1018,7 @@ document from the database. Note that in addition to deleting the
 
 [source,csharp]
 ----
-                                     
+
 if (bookmark.Source["id"] is string idToRemove) {
         var doc = UserSession.Database.GetDocument(idToRemove);
         if (doc != null) {
@@ -1212,9 +1047,8 @@ The screen capture is for UWP version of the app.
 
 image:https://raw.githubusercontent.com/couchbaselabs/mobile-travel-sample/master/content/assets/uwp_basics_delete_document.gif[image]
 
-[[security]]
 Security
-~~~~~~~~
+^^^^^^^^
 
 [[user-management]]
 User Management
@@ -1285,7 +1119,7 @@ API to dynamically create the user.
 [source,javascript]
 ----
  "users":{
-    "admin": {"password": "password", "admin_channels": ["*"]}, 
+    "admin": {"password": "password", "admin_channels": ["*"]},
     "demo": {"password": "password"},
     "tester": {"password": "password"}
 }
@@ -1332,7 +1166,6 @@ curl -X GET http://localhost:4984/travel-sample/ -H 'authorization: Basic ZGVtbz
 * Confirm that you see the details of the "travel-sample" database and
 "state" is "online"
 
-[[sync]]
 Sync
 ~~~~
 
@@ -1518,7 +1351,7 @@ repl.StatusChanged += (sender, args) =>
         Debug.WriteLine(
                 $"PushPull Replicator: {s.Progress.Completed}/{s.Progress.Total}, error {args.LastError?.Message ?? "<none>"}, activity = {s.Activity}");
 };
-            
+
 ----
 
 Start the Replication
@@ -1581,7 +1414,6 @@ your list of flights in the mobile app
 The screen recording is for UWP version of the app
 image:https://raw.githubusercontent.com/couchbaselabs/mobile-travel-sample/master/content/assets/uwp_pull_replication.gif[image]
 
-[[pre-built-database]]
 Pre-built database
 ~~~~~~~~~~~~~~~~~~
 
@@ -1638,7 +1470,6 @@ The screen recording is for UWP app.
 
 image:https://raw.githubusercontent.com/couchbaselabs/mobile-travel-sample/master/content/assets/uwp_prebuilt.gif[image]
 
-[[query]]
 Query
 ~~~~~
 
@@ -1667,7 +1498,7 @@ a `CouchbaseLite.Expression` type. Consider the following query
 ----
 var hotelSearchQuery = Query
                                     .Select(SelectResult.Expression(Meta.ID),
-                                                    SelectResult.Expression(Expression.Property("name"))) 
+                                                    SelectResult.Expression(Expression.Property("name")))
                                     .From(DataSource.Database(UserSession.Database))
                                     .Where(
                                             Expression.Property("description").Like("%\(descriptionStr)%")
@@ -1744,7 +1575,7 @@ using (var results = searchQuery.Execute()) {
         return results.Select(x => x.GetString("airportname")).Where(x => x != null).ToList();
 }
 
-// Don't forget to Dispose the query object when finished       
+// Don't forget to Dispose the query object when finished
 ----
 
 [[try-it-out-17]]
@@ -1882,13 +1713,8 @@ the list
 The screen recording is for UWP version of app
 image:https://raw.githubusercontent.com/couchbaselabs/mobile-travel-sample/master/content/assets/uwp_join_query.gif[image]
 
-[[full-text-search]]
 Full Text Search
 ~~~~~~~~~~~~~~~~
-
-[[full-text-search-1]]
-Full Text Search
-^^^^^^^^^^^^^^^^
 
 Couchbase Lite 2.0 now supports Full Text Search (FTS). FTS is
 accomplished using the `match` query. FTS matches are case-insenstive.
@@ -1911,7 +1737,7 @@ private void CreateDatabaseIndexes(Database db)
 
         db.CreateIndex("description",
                 Index.FTSIndex(FTSIndexItem.Expression(Expression.Property("description"))));
-        
+
         ...
 }
 ----

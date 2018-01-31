@@ -1,8 +1,8 @@
 name: mobile-travel-sample
 title: Mobile Travel Sample
 version: 'master'
-start_page: ROOT:swift.adoc
+start_page: swift:swift.adoc
 nav:
-- modules/ROOT/swift.adoc
-- modules/ROOT/java.adoc
-- modules/ROOT/csharp.adoc
+- modules/swift/nav.adoc
+- modules/java/nav.adoc
+- modules/csharp/nav.adoc
